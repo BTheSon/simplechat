@@ -15,7 +15,7 @@ root
 ├── rooms
 │   ├── <roomId_1>
 │   │     ├── name: "Phòng 1"
-│   │     ├── code: 363636
+│   │     ├── code: "363636"
 │   │     ├── ownerId: "<userId_1>"
 │   │     ├── isPrivate: false
 │   │     ├── createdAt: 1701872200
@@ -23,7 +23,7 @@ root
 │   │
 │   └── <roomId_2>
 │         ├── name: "Phòng 2"
-│         ├── code: 181818
+│         ├── code: "181818"
 │         ├── ownerId: "<userId_2>"
 │         ├── isPrivate: true
 │         ├── createdAt: 1701872250
