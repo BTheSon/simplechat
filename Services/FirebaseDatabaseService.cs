@@ -1,4 +1,5 @@
-﻿using simplechat.Objects;
+﻿using Microsoft.JSInterop;
+using simplechat.Objects;
 using System.Text;
 
 namespace simplechat.Services;

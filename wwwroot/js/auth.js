@@ -11,25 +11,20 @@ const provider = new GoogleAuthProvider();
 export async function signInWithGooglePopup() {
     try {
         const result = await signInWithPopup(auth, provider);
-
         const user = result.user;
-        console.log("User signed in:", user.displayName, user.email, user.uid);
-
-        const idToken = await user.getIdToken();
-        console.log("ID Token:", idToken);
 
         // await fetch('/Account/ExternalSignIn', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ idToken }) });
 
         return {
             ok: true,
-            user,
-            idToken
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL
         };
     } catch (err) {
-        console.error("Sign-in error:", err);
         return {
-            ok: false,
-            error: err
+            ok: false
         };
     }
 }

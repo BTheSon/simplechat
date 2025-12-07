@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using Objects
+@using Services
+@using System.Text.Json
 
 <PageTitle>Home</PageTitle>
 
@@ -16,12 +19,15 @@
     }
 
     private async Task GoogleLogin() {
-        var result = await JS.InvokeAsync<object>("window.signInWithGooglePopup");
+        JsonElement result = await JS.InvokeAsync<JsonElement>("window.signInWithGooglePopup");
+        bool success = result.GetProperty("ok").GetBoolean();
 
-        if (result != null) {
-            Console.WriteLine("Đăng nhập thành công!");
-        } else {
-            Console.WriteLine("Đăng nhập thất bại hoặc bị huỷ.");
+        if (!success) {
+            return;
         }
+
+        string displayName = result.GetProperty("displayName").GetString();
+        string uid = result.GetProperty("uid").GetString();
+        await FirebaseDatabaseService.CreateWithSpecificKey(new User { displayName = displayName, createdAt = 1 }, "users", uid);
     }
 }
