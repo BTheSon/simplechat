@@ -11,6 +11,7 @@
     <img src="/Resources/google_icon_64dp.png" width="22" height="22">
     <span>Đăng nhập với Google</span>
 </button>
+<button class="btn btn-danger" @onclick="GoogleLogout">Đăng xuất</button>
 
 @code {
     [Inject]
@@ -29,5 +30,9 @@
         string displayName = result.GetProperty("displayName").GetString();
         string uid = result.GetProperty("uid").GetString();
         await FirebaseDatabaseService.CreateWithSpecificKey(new User { displayName = displayName, createdAt = 1 }, "users", uid);
+    }
+
+    private async Task GoogleLogout() {
+        await JS.InvokeAsync<JsonElement>("window.signOutUser");
     }
 }

@@ -29,6 +29,20 @@
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="js/firebase-init.js" type="module"></script>
     <script src="js/auth.js" type="module"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            console.log("typeof observeAuthState:", typeof window.observeAuthState);
+
+            if (typeof window.observeAuthState === "function") {
+                window.observeAuthState(user => {
+                    console.log("auth changed ->", user);
+                    // update UI...
+                });
+            } else {
+                console.error("observeAuthState chưa sẵn sàng — có thể module chưa load hoặc có lỗi trong module.");
+            }
+        });
+    </script>
 </body>
 
 </html>
